@@ -1,11 +1,5 @@
-FROM python:3.9-slim-buster
+FROM nginx:latest
 
-WORKDIR /app
+COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY requirements.txt .
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD [ "python", "./app1.py" ]
+CMD ["nginx", "-g", "daemon off;"]
