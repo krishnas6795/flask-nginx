@@ -1,0 +1,63 @@
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+
+  sendfile on;
+
+  upstream app1 {
+    server www.codewithrams.com:5001;
+  }
+
+  upstream app2 {
+    server www.codewithrams.com:5002;
+  }
+
+
+  server {
+    root /usr/share/nginx/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name www.codewithrams.com;
+
+    location / {
+      try_files $uri $uri/ =404;
+    }
+
+    location /app1 {
+      proxy_pass http://app1/;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /app2 {
+      proxy_pass http://app2/;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+    }
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/www.codewithrams.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/www.codewithrams.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+  server {
+    if ($host = www.codewithrams.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name www.codewithrams.com;
+    listen 80;
+    return 404; # managed by Certbot
+
+
+}}
