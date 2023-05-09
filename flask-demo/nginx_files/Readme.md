@@ -35,10 +35,10 @@ nginx -s reload
 ```
 ![App Screenshot](./img/nginx-t.JPG)
 
-[Code With Rams](https://codewithrams.com)
-[App1](https://app1.codewithrams.com 
+1. [Code With Rams](https://codewithrams.com)
+1. [App1](https://app1.codewithrams.com 
 "App1-CodeWithRams")
-[App2](https://app2.codewithrams.com 
+1. [App2](https://app2.codewithrams.com 
 "App2-CodeWithRams")
-[Jenkins](https://jenkins.codewithrams.com 
+1. [Jenkins](https://jenkins.codewithrams.com 
 "Jenkins-CodeWithRams")
